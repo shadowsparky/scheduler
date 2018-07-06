@@ -11,11 +11,15 @@
         android:layout_height="150sp"
         android:background="@color/colorPrimary">
     </FrameLayout>
+
     <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginHorizontal="20sp"
         android:layout_marginVertical="100sp"
-        android:layout_marginHorizontal="20sp">
+        tools:layout_editor_absoluteX="20dp"
+        tools:layout_editor_absoluteY="100dp">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -23,28 +27,28 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout"
-                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
-                        android:id="@+id/AuthTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/auth"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
-                        android:textSize="30sp"/>
+                <TextView
+                    android:id="@+id/AuthTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/auth"
+                    android:textSize="30sp" />
 
-                    <View
-                        android:id="@+id/view"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_margin="20dp"
-                        android:background="@android:color/darker_gray"></View>
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="20dp"
+                    android:background="@android:color/darker_gray"></View>
 
             </LinearLayout>
 
@@ -55,15 +59,17 @@
                 android:orientation="vertical"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
+
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp">
+                    android:layout_marginEnd="8dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp">
 
                     <EditText
-                        android:id="@+id/Login_ET"
+                        android:id="@+id/LoginET"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:hint="Логин"
@@ -75,9 +81,10 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp">
+                    android:layout_marginEnd="8dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp">
 
                     <EditText
                         android:id="@+id/Password_ET"
@@ -88,19 +95,41 @@
                         android:maxLength="30"></EditText>
 
                 </android.support.design.widget.TextInputLayout>
+                <CheckBox
+                    android:id="@+id/rememberbox"
+                    android:layout_margin="8dp"
+                    android:layout_gravity="center"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rememberme"/>
             </LinearLayout>
 
             <Button
-                style="@android:style/Widget.Material.Light.Button.Borderless.Small"
+                android:id="@+id/pushbutton"
+                style="@android:style/Widget.Material.Button.Colored"
+                android:layout_margin="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/auth"
+                android:layout_height="60sp"
+                android:text="@string/pushauth"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v7.widget.CardView>
+
+    <Button
+        android:id="@+id/regbutton"
+        style="@android:style/Widget.Material.Button.Borderless.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/reg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>
