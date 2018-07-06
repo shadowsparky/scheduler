@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Caroline Scheduler</string>
+    <string name="auth">Авторизация</string>
 </resources>

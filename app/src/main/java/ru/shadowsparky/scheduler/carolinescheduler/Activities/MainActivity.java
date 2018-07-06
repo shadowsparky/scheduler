@@ -1,4 +1,4 @@
-package ru.shadowsparky.scheduler.carolinescheduler;
+package ru.shadowsparky.scheduler.carolinescheduler.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.InputStream;
 import java.util.Map;
+
+import ru.shadowsparky.scheduler.carolinescheduler.R;
 
 public class MainActivity extends AppCompatActivity {
 
