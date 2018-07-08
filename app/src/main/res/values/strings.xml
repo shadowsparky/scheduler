@@ -4,4 +4,9 @@
     <string name="pushauth">Авторизоваться</string>
     <string name="rememberme">Запомнить меня</string>
     <string name="reg">Регистрация</string>
+    <string name="Auth_Failed"></string>
+
+    <string name="Incorrect_login_or_password">Неправильный логин или пароль</string>
+    <string name="Registration_Not_Available">Регистрация временно недоступна</string>
+    <string name="Error_In_The_Save">При сохранении данных произошла ошибка</string>
 </resources>

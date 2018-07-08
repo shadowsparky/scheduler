@@ -28,7 +28,7 @@ public class Auth extends AppCompatActivity implements View.OnClickListener, IAu
         setContentView(R.layout.activity_auth);
         Log.isLoggable(TAG, Log.DEBUG);
         initListeners();
-        fastAuth();
+        tryAuth();
     }
 
     private void initListeners(){
@@ -38,13 +38,13 @@ public class Auth extends AppCompatActivity implements View.OnClickListener, IAu
         RegButton.setOnClickListener(this);
     }
 
-    private boolean fastAuth(){
+    private boolean tryAuth(){
         String[] authData;
         try {
             authData = loadPreference();
             auth(authData[LOGIN_INDEX], authData[PASSWORD_INDEX]);
         } catch (AuthDataNotFoundException e) {
-            e.printStackTrace();
+            Log.d(TAG, e.getMessage());
             return false;
         }
         return true;
@@ -59,7 +59,7 @@ public class Auth extends AppCompatActivity implements View.OnClickListener, IAu
                 auth(Login, Password);
                 break;
             case R.id.regbutton:
-                Snackbar.make(view, "Регистрация временно недоступна", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(view, getResources().getString(R.string.Auth_Failed), Snackbar.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -69,26 +69,34 @@ public class Auth extends AppCompatActivity implements View.OnClickListener, IAu
             // ok
             Boolean Check_Remember = ((CheckBox) findViewById(R.id.rememberbox)).isChecked();
             if (Check_Remember){
-                savePreference(Login, Password);
+                try {
+                    savePreference(Login, Password);
+                } catch(InternalError e){
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.Error_In_The_Save), Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, e.getMessage());
+                }
             }
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
-            finish();
+            goToMainActivity();
         } else {
             Log.d(TAG, "auth failed");
-            Snackbar.make(getCurrentFocus(), "Неправильный логин или пароль", Snackbar.LENGTH_SHORT).show();
+            Snackbar.make(getCurrentFocus(), getResources().getString(R.string.Incorrect_login_or_password), Snackbar.LENGTH_SHORT).show();
         }
+    }
+    private void goToMainActivity(){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+        finish();
     }
 
     @Override
-    public void savePreference(String Login, String Password) {
+    public void savePreference(String Login, String Password) throws InternalError {
         SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
         Boolean checkSave = sharedPreferences.edit()
                 .putString(LOGIN_TAG, Login)
                 .putString(PASSWORD_TAG, Password)
                 .commit();
         if (!checkSave){
-            Toast.makeText(getApplicationContext(), "При сохранении данных произошла ошибка", Toast.LENGTH_SHORT).show();
+            throw new InternalError("Save don't available");
         }
     }
 
