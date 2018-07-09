@@ -40,10 +40,10 @@ public class Auth extends AppCompatActivity implements View.OnClickListener, IAu
     public static final String TAG = "MainTag";
     public static final int REPETITIVE_AUTH = 1;
     public static final int FIRST_AUTH = 0;
-    private AuthThread _thread;
     private Button AuthButton;
     private Button RegButton;
     private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +56,11 @@ public class Auth extends AppCompatActivity implements View.OnClickListener, IAu
             initListeners();
         }
     }
-
+    @Override
+    public void onStart(){
+        super.onStart();
+        mUser = mAuth.getCurrentUser();
+    }
     @Override
     public void initListeners(){
         AuthButton = (Button) findViewById(R.id.pushbutton);
@@ -70,12 +74,7 @@ public class Auth extends AppCompatActivity implements View.OnClickListener, IAu
         AuthButton.setEnabled(false);
         pd.setTitle(getResources().getString(R.string.auth) + "...");
         pd.setMessage(getResources().getString(R.string.AuthChecker));
-        pd.setButton(Dialog.BUTTON_NEGATIVE, "Отмена", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                _thread.cancel(true);
-            }
-        });
+        pd.setCanceledOnTouchOutside(false);
         pd.show();
     }
 
@@ -87,31 +86,42 @@ public class Auth extends AppCompatActivity implements View.OnClickListener, IAu
 
     @Override
     public boolean tryAuth(){
-        String[] authData;
+        String[]result;
         try {
-            authData = loadPreference();
-            auth(authData[LOGIN_INDEX], authData[PASSWORD_INDEX], REPETITIVE_AUTH);
+            result = loadPreference();
         } catch (AuthDataNotFoundException e) {
-            Log.d(TAG, e.getMessage());
+            e.printStackTrace();
             return false;
         }
+        AuthTask at = new AuthTask(this, REPETITIVE_AUTH);
+        at.execute(result);
         return true;
     }
 
     @Override
-    public void auth(String login, String password, int AuthControl){
-        String[] res = {login, password};
-        _thread = new AuthThread(this, AuthControl, mAuth);
-        _thread.execute(res);
+    public void auth(final String login, final String password, int AuthControl){
+        mAuth.signInWithEmailAndPassword(login, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    mUser = mAuth.getCurrentUser();
+                    goToMainActivity();
+                    savePreference(login, password);
+                } else { raiseAuthError(); }
+            }
+        });
     }
 
     @Override
     public void onClick(View view) {
+//        ProgressDialog pd = new ProgressDialog(this);
         String Login = ((TextView) findViewById(R.id.LoginET)).getText().toString();
         String Password = ((TextView) findViewById(R.id.Password_ET)).getText().toString();
         switch (view.getId()){
             case R.id.pushbutton:
-                auth(Login, Password, FIRST_AUTH);
+                AuthTask at = new AuthTask(this, FIRST_AUTH);
+                String[] executeData = {Login, Password};
+                at.execute(executeData);
                 break;
             case R.id.regbutton:
                 Snackbar.make(view, getResources().getString(R.string.Registration_Not_Available), Snackbar.LENGTH_SHORT).show();
@@ -165,70 +175,35 @@ public class Auth extends AppCompatActivity implements View.OnClickListener, IAu
     }
 }
 
-class AuthThread extends AsyncTask<String, Integer, String> implements OnCompleteListener<AuthResult>{
-    public static final String USER_NOT_EXISTS = "user not Exists";
-    public static final String INTERRUPTED = "interrupted";
-    public static final String USER_EXISTS = "User Exists";
+class AuthTask extends AsyncTask<String, String, String>{
+    public static final String THREAD_END = "end";
     private Auth _auth;
-    private Task checkAuth;
-    private int _authControl;
+    private int t;
     private ProgressDialog pd;
-    private FirebaseAuth _mAuth;
 
-    AuthThread(Auth auth, int AuthControl, FirebaseAuth AuthVar){
-        _auth = auth;
-        _authControl = AuthControl;
-        _mAuth = AuthVar;
-        if (_authControl == Auth.FIRST_AUTH)
+    public AuthTask(Auth auth, int t){
+        this._auth = auth;
+        this.t = t;
+        if (t != Auth.REPETITIVE_AUTH)
             pd = new ProgressDialog(_auth);
+    }
+    @Override
+    protected String doInBackground(String... strings) {
+        _auth.auth(strings[Auth.LOGIN_INDEX], strings[Auth.PASSWORD_INDEX], t);
+        return THREAD_END;
     }
 
     @Override
     protected void onPreExecute() {
-        if (_authControl == Auth.FIRST_AUTH)
+        super.onPreExecute();
+        if (t != Auth.REPETITIVE_AUTH)
             _auth.enableLoading(pd);
     }
 
     @Override
     protected void onPostExecute(String s) {
-        if (_authControl == Auth.FIRST_AUTH)
+        super.onPreExecute();
+        if (t != Auth.REPETITIVE_AUTH)
             _auth.disableLoading(pd);
-        switch (s){
-            case USER_EXISTS:
-                _auth.goToMainActivity();
-                break;
-            case USER_NOT_EXISTS:
-                _auth.raiseAuthError();
-                break;
-        }
-    }
-
-    @Override
-    protected String doInBackground(String... strings) {
-        _mAuth.signInWithEmailAndPassword(strings[Auth.LOGIN_INDEX],strings[Auth.PASSWORD_INDEX])
-                .addOnCompleteListener(this);
-        if (isCancelled()) return INTERRUPTED;
-        return "test";
-//        onComplete(checkAuth);
-//        if (checkAuth.isSuccessful()){
-//            return USER_EXISTS;
-//        } else {
-//            return USER_NOT_EXISTS;
-//        }
-    }
-
-    @Override
-    protected void onCancelled() {
-        _auth.disableLoading(pd);
-        Log.d(Auth.TAG, INTERRUPTED);
-    }
-
-    @Override
-    public void onComplete(@NonNull Task task) {
-        if (task.isSuccessful()){
-            _auth.goToMainActivity();
-        } else {
-            _auth.raiseAuthError();
-        }
     }
 }
