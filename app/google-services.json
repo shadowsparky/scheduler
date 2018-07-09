@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "13973764735",
+    "firebase_url": "https://carolinescheduler.firebaseio.com",
+    "project_id": "carolinescheduler",
+    "storage_bucket": "carolinescheduler.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13973764735:android:60d8893e85bc4c08",
+        "android_client_info": {
+          "package_name": "ru.shadowsparky.scheduler.carolinescheduler"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13973764735-kdbi9rl583r1eftfetcc9nhdh34sitj1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.shadowsparky.scheduler.carolinescheduler",
+            "certificate_hash": "3ecae11ec92d54d7917cb4297088784b4ba6c8bf"
+          }
+        },
+        {
+          "client_id": "13973764735-i5uc2as5krttpa8dm32piovr9jhovm5i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLFawVhtJfsOSk1xF7PRr3AJMxyIxU4_g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13973764735-i5uc2as5krttpa8dm32piovr9jhovm5i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
