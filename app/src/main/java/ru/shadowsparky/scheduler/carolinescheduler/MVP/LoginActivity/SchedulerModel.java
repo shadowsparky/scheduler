@@ -1,25 +1,26 @@
-package ru.shadowsparky.scheduler.carolinescheduler.MVP;
+package ru.shadowsparky.scheduler.carolinescheduler.MVP.LoginActivity;
 
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import ru.shadowsparky.scheduler.carolinescheduler.Exceptions.AuthDataNotFoundException;
-import ru.shadowsparky.scheduler.carolinescheduler.Interfaces.IContracts;
+import ru.shadowsparky.scheduler.carolinescheduler.Interfaces.ICallbacks;
 
-import static android.content.Context.MODE_PRIVATE;
-import static ru.shadowsparky.scheduler.carolinescheduler.Interfaces.IAuthData.LOGIN_TAG;
-import static ru.shadowsparky.scheduler.carolinescheduler.Interfaces.IAuthData.PASSWORD_TAG;
+import static ru.shadowsparky.scheduler.carolinescheduler.MVP.LoginActivity.ILoginContracts.LOGIN_TAG;
+import static ru.shadowsparky.scheduler.carolinescheduler.MVP.LoginActivity.ILoginContracts.PASSWORD_TAG;
 
-public class SchedulerModel implements IContracts.ContractModel {
-    public interface IAuthCallback{
-        void onAuthCompleteListener(boolean result);
-    }
+
+public class SchedulerModel implements ILoginContracts.ContractModel_Auth {
+
     public static final int AUTH_DATA_SIZE = 2;
     public static final int LOGIN_INDEX = 0;
     public static final int PASSWORD_INDEX = 1;
+
+    interface IAuthCallback{
+        void onAuthCompleteListener(boolean result);
+    }
 
     @Override
     public void savePrivateData(SharedPreferences sp, String _login, String _password) throws InternalError{

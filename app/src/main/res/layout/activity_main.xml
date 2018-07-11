@@ -5,15 +5,8 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".Activities.MainActivity">
+    tools:context=".MVP.MainActivity.MainActivity">
     <include
         layout="@layout/toolbarious">
     </include>
-    <fragment
-        android:id="@+id/testtttttddasd"
-        android:name="ru.shadowsparky.scheduler.carolinescheduler.Fragments.SchedulerItemsFragment_test"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
->
-    </fragment>
 </LinearLayout>

@@ -1,26 +1,21 @@
-package ru.shadowsparky.scheduler.carolinescheduler.MVP;
-
-import android.support.design.widget.Snackbar;
+package ru.shadowsparky.scheduler.carolinescheduler.MVP.LoginActivity;
 
 import ru.shadowsparky.scheduler.carolinescheduler.Exceptions.AuthDataNotFoundException;
-import ru.shadowsparky.scheduler.carolinescheduler.Interfaces.IContracts;
+import ru.shadowsparky.scheduler.carolinescheduler.Interfaces.ICallbacks;
 
-import static ru.shadowsparky.scheduler.carolinescheduler.MVP.SchedulerModel.AUTH_DATA_SIZE;
-import static ru.shadowsparky.scheduler.carolinescheduler.MVP.SchedulerModel.LOGIN_INDEX;
-import static ru.shadowsparky.scheduler.carolinescheduler.MVP.SchedulerModel.PASSWORD_INDEX;
+import static ru.shadowsparky.scheduler.carolinescheduler.MVP.LoginActivity.SchedulerModel.AUTH_DATA_SIZE;
+import static ru.shadowsparky.scheduler.carolinescheduler.MVP.LoginActivity.SchedulerModel.LOGIN_INDEX;
+import static ru.shadowsparky.scheduler.carolinescheduler.MVP.LoginActivity.SchedulerModel.PASSWORD_INDEX;
 
-public class SchedulerPresenter implements IContracts.ContractPresenter {
+public class SchedulerPresenter implements ILoginContracts.ContractPresenter_Auth {
     public static final int REMEMBERED_AUTH = 1;
-    private IContracts.ContractView_Auth _viewAuth;
+    private ILoginContracts.ContractView_Auth _viewAuth;
     private SchedulerModel _model;
 
     // Auth Init
-    public SchedulerPresenter(IContracts.ContractView_Auth view) {
+    public SchedulerPresenter(ILoginContracts.ContractView_Auth view) {
         this._viewAuth = view;
         this._model = new SchedulerModel();
-    }
-    public SchedulerPresenter(){
-
     }
 
     @Override
@@ -36,7 +31,8 @@ public class SchedulerPresenter implements IContracts.ContractPresenter {
     }
     @Override
     public void authClicked(final String[] accountData, int control){
-        _viewAuth.showLoading();
+        if (control != REMEMBERED_AUTH)
+            _viewAuth.showLoading();
         SchedulerModel.IAuthCallback callback = (result) -> {
             if (result){
                 if (control != REMEMBERED_AUTH)
@@ -47,11 +43,14 @@ public class SchedulerPresenter implements IContracts.ContractPresenter {
             }
             else
                 _viewAuth.raiseAuthError();
+            if (control != REMEMBERED_AUTH)
+                _viewAuth.hideLoading();
         };
+        // auth
         if ((!accountData[LOGIN_INDEX].equals("")) && (!accountData[PASSWORD_INDEX].equals("")))
             _model.auth(accountData[LOGIN_INDEX], accountData[PASSWORD_INDEX], callback);
-        _viewAuth.hideLoading();
     }
+
     @Override
     public void regClicked() {
     }

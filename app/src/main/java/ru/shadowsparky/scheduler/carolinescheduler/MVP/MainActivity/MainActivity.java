@@ -1,4 +1,4 @@
-package ru.shadowsparky.scheduler.carolinescheduler.Activities;
+package ru.shadowsparky.scheduler.carolinescheduler.MVP.MainActivity;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +25,4 @@ public class MainActivity extends AppCompatActivity {
         Toolbar t = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(t);
     }
-
-
 }

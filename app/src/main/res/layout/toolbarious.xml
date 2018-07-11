@@ -7,6 +7,6 @@
         android:layout_width="match_parent"
         android:background="@color/colorPrimary"
         android:theme="@style/AppTheme.toolbar"
-        android:layout_height="50dp">
+        android:layout_height="60dp">
     </android.support.v7.widget.Toolbar>
 </LinearLayout>
