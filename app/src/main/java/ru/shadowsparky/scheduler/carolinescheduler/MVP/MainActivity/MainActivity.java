@@ -15,7 +15,7 @@ import java.util.Map;
 
 import ru.shadowsparky.scheduler.carolinescheduler.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IMainContracts.MainViewContract {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

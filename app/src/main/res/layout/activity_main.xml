@@ -7,6 +7,16 @@
     android:layout_height="match_parent"
     tools:context=".MVP.MainActivity.MainActivity">
     <include
+        android:id="@+id/mainToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         layout="@layout/toolbarious">
+
     </include>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="ru.shadowsparky.scheduler.carolinescheduler.MVP.MainActivity.MainFragment">
+    </fragment>
 </LinearLayout>
