@@ -8,4 +8,7 @@
     <string name="Registration_Not_Available">Регистрация временно недоступна</string>
     <string name="Error_In_The_Save">При сохранении данных произошла ошибка</string>
     <string name="AuthChecker">Пожалуйста, подождите...</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

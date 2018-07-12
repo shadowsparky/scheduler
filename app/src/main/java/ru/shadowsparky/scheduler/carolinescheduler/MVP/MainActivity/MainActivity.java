@@ -1,28 +1,92 @@
 package ru.shadowsparky.scheduler.carolinescheduler.MVP.MainActivity;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.InputStream;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnItemClick;
+import ru.shadowsparky.scheduler.carolinescheduler.Adapters.MainListAdapter;
+import ru.shadowsparky.scheduler.carolinescheduler.MVP.ChoosedItemFragment.ChoosedItem;
 import ru.shadowsparky.scheduler.carolinescheduler.R;
+import ru.shadowsparky.scheduler.carolinescheduler.SQLite.Scheduler_Database;
 
 public class MainActivity extends AppCompatActivity implements IMainContracts.MainViewContract {
+
+    @BindView(R.id.toolbar)
+    Toolbar _toolbar;
+    private MainFragment _fragment;
+    private Scheduler_Database dbEngine;
+    private String[] data = {"test", "test2", "test3", "test4"};
+
+    @Override
+    public Scheduler_Database getDbEngine() {
+        return dbEngine;
+    }
+
+    @Override
+    public SQLiteDatabase getReadableDatabase() {
+        return dbEngine.getReadableDatabase();
+    }
+
+    @Override
+    public SQLiteDatabase getWriteableDatabase() {
+        return dbEngine.getWritableDatabase();
+    }
+
+    @Override
+    public void itemClick(int position) {
+        itemFragmentLoad();
+        Toast.makeText(getApplicationContext(), data[position], Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void itemFragmentLoad() {
+        Fragment ci = new ChoosedItem();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
+        ft.replace(R.id.fragment_Container, ci);
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        if (fragment.getId() == R.id.mainFragment){
+            _fragment = (MainFragment) fragment;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme_toolbar);
         setContentView(R.layout.activity_main);
-        Toolbar t = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(t);
+        ButterKnife.bind(this);
+        dbEngine = new Scheduler_Database(this);
+        setToolbar();
+        //TODO: REMOVE THIS SHEET
+        MainListAdapter adapter = new MainListAdapter(getApplicationContext(),R.layout.single_item, data, data);
+        _fragment.setAdapter(adapter);
+    }
+
+    @Override
+    public void setToolbar() {
+        setSupportActionBar(_toolbar);
     }
 }

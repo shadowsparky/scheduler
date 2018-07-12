@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import butterknife.BindView;
+import ru.shadowsparky.scheduler.carolinescheduler.MVP.MainActivity.MainFragment;
 import ru.shadowsparky.scheduler.carolinescheduler.R;
 
 public class MainListAdapter extends ArrayAdapter<String> {
