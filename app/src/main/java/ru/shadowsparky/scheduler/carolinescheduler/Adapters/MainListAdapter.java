@@ -6,24 +6,37 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import butterknife.BindView;
-import ru.shadowsparky.scheduler.carolinescheduler.MVP.MainActivity.MainFragment;
+import java.util.ArrayList;
+
 import ru.shadowsparky.scheduler.carolinescheduler.R;
+import ru.shadowsparky.scheduler.carolinescheduler.Utils.Schedule_Element;
 
-public class MainListAdapter extends ArrayAdapter<String> {
+public class MainListAdapter extends BaseAdapter {
     private Context mContext;
-    private String[] itemHeader;
-    private String[] itemDescription;
+    private ArrayList<Schedule_Element> elements;
 
-    public MainListAdapter(@NonNull Context context, int resource, @NonNull String[] objects, @NonNull String[] itemDescription) {
-        super(context, resource, objects);
-        this.mContext = context;
-        this.itemHeader = objects;
-        this.itemDescription = itemDescription;
+    public MainListAdapter(Context mContext, ArrayList<Schedule_Element> elements) {
+        this.mContext = mContext;
+        this.elements = elements;
+    }
+
+    @Override
+    public int getCount() {
+        return elements.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return elements.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     @NonNull
@@ -32,7 +45,7 @@ public class MainListAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = inflater.inflate(R.layout.single_item, parent, false);
         TextView _textView = row.findViewById(R.id.text);
-        _textView.setText(itemHeader[position]);
+        _textView.setText(elements.get(position).getSchedule_Header());
         ImageView _imageView = row.findViewById(R.id.image);
         _imageView.setImageResource(android.R.color.background_dark);
         return row;
