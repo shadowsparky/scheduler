@@ -17,11 +17,5 @@
         android:id="@+id/fragment_Container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <fragment
-            android:id="@+id/mainFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:name="ru.shadowsparky.scheduler.carolinescheduler.MVP.MainActivity.MainFragment">
-        </fragment>
     </FrameLayout>
 </LinearLayout>

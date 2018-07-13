@@ -29,14 +29,13 @@ public class Auth extends AppCompatActivity implements ILoginContracts.ContractV
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        _presenter = new SchedulerPresenter(this);
+        _presenter = new SchedulerPresenter(this, new SchedulerModel());
         if (!_presenter.rememberedAuth()) {
             setTheme(R.style.AppThemeWithStatusBarColor);
             setContentView(R.layout.activity_auth);
             ButterKnife.bind(this);
         }
     }
-
 
     @Override
     @OnClick(R.id.authButton)

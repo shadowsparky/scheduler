@@ -17,18 +17,12 @@ public class InsertThread extends AsyncTask<String, Void, Long> {
         this.TableName = tableName;
         this.values = values;
     }
-
-    @Override
     protected void onPreExecute() {
         callback.setLoading(true);
     }
-
-    @Override
     protected void onPostExecute(Long result) {
         callback.setLoading(false);
     }
-
-    @Override
     protected Long doInBackground(String... strings) {
         return db.insert(TableName, null, values);
     }

@@ -1,5 +1,6 @@
 package ru.shadowsparky.scheduler.carolinescheduler.MVP.MainActivity;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.widget.ArrayAdapter;
 
@@ -14,11 +15,9 @@ public interface IMainContracts {
     }
     interface MainViewContract{
         void setToolbar();
-        Scheduler_Database getDbEngine();
-        SQLiteDatabase getReadableDatabase();
-        SQLiteDatabase getWriteableDatabase();
         void itemClick(int position);
         void itemFragmentLoad();
+        Context getContext();
     }
     interface MainPresenterContract{
 

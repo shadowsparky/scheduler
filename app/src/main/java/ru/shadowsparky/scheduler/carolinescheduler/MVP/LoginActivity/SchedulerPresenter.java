@@ -10,17 +10,17 @@ import static ru.shadowsparky.scheduler.carolinescheduler.MVP.LoginActivity.Sche
 public class SchedulerPresenter implements ILoginContracts.ContractPresenter_Auth {
     public static final int REMEMBERED_AUTH = 1;
     private ILoginContracts.ContractView_Auth _viewAuth;
-    private SchedulerModel _model;
+    private ILoginContracts.ContractModel_Auth _model;
 
     // Auth Init
-    public SchedulerPresenter(ILoginContracts.ContractView_Auth view) {
+    public SchedulerPresenter(ILoginContracts.ContractView_Auth view, ILoginContracts.ContractModel_Auth _model) {
         this._viewAuth = view;
-        this._model = new SchedulerModel();
+        this._model = _model;
     }
 
     @Override
     public boolean rememberedAuth(){
-        String[] accountData = new String[AUTH_DATA_SIZE];
+        String[] accountData;
         try {
             accountData = _model.loadPrivateData(_viewAuth.getSharedPref());
         } catch (AuthDataNotFoundException e) {

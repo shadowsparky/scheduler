@@ -2,7 +2,9 @@ package ru.shadowsparky.scheduler.carolinescheduler.MVP.MainActivity;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.support.v7.util.SortedList;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -23,6 +26,7 @@ import butterknife.OnClick;
 import butterknife.OnItemClick;
 import ru.shadowsparky.scheduler.carolinescheduler.Adapters.MainListAdapter;
 import ru.shadowsparky.scheduler.carolinescheduler.MVP.ChoosedItemFragment.ChoosedItem;
+import ru.shadowsparky.scheduler.carolinescheduler.MVP.NewScheduleFragment.NewSchedule;
 import ru.shadowsparky.scheduler.carolinescheduler.R;
 import ru.shadowsparky.scheduler.carolinescheduler.SQLite.Scheduler_Database;
 
@@ -31,31 +35,12 @@ public class MainActivity extends AppCompatActivity implements IMainContracts.Ma
     @BindView(R.id.toolbar)
     Toolbar _toolbar;
     private MainFragment _fragment;
-    private Scheduler_Database dbEngine;
-    private String[] data = {"test", "test2", "test3", "test4"};
-
-    @Override
-    public Scheduler_Database getDbEngine() {
-        return dbEngine;
+    public Context getContext() {
+        return getApplicationContext();
     }
-
-    @Override
-    public SQLiteDatabase getReadableDatabase() {
-        return dbEngine.getReadableDatabase();
-    }
-
-    @Override
-    public SQLiteDatabase getWriteableDatabase() {
-        return dbEngine.getWritableDatabase();
-    }
-
-    @Override
     public void itemClick(int position) {
         itemFragmentLoad();
-        Toast.makeText(getApplicationContext(), data[position], Toast.LENGTH_SHORT).show();
     }
-
-    @Override
     public void itemFragmentLoad() {
         Fragment ci = new ChoosedItem();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -64,28 +49,22 @@ public class MainActivity extends AppCompatActivity implements IMainContracts.Ma
         ft.addToBackStack(null);
         ft.commit();
     }
-
-    @Override
-    public void onAttachFragment(Fragment fragment) {
-        if (fragment.getId() == R.id.mainFragment){
-            _fragment = (MainFragment) fragment;
-        }
+    public void setMainListAdapter(MainListAdapter adapter) {
+        _fragment.setAdapter(adapter);
     }
 
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme_toolbar);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        dbEngine = new Scheduler_Database(this);
         setToolbar();
-        //TODO: REMOVE THIS SHEET
-        MainListAdapter adapter = new MainListAdapter(getApplicationContext(),R.layout.single_item, data, data);
-        _fragment.setAdapter(adapter);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        _fragment = new MainFragment();
+        ft.replace(R.id.fragment_Container, _fragment);
+        ft.addToBackStack(null);
+        ft.commit();
     }
-
-    @Override
     public void setToolbar() {
         setSupportActionBar(_toolbar);
     }

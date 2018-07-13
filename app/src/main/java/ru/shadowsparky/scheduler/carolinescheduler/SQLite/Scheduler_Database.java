@@ -10,19 +10,15 @@ public class Scheduler_Database extends SQLiteOpenHelper {
     public static final int DATABASE_CURRENT_VERSION = 1;
     public static final String SCHEDULES_TABLE = "Schedules";
     public static final String TASKS_TABLE = "Tasks";
-
     private Context _context;
 
     public Scheduler_Database(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_CURRENT_VERSION);
         this._context = context;
     }
-
-    @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         createDatabase(sqLiteDatabase);
     }
-
     private void createDatabase(SQLiteDatabase sqLiteDatabase){
         sqLiteDatabase.execSQL (
                 "CREATE TABLE " + SCHEDULES_TABLE + " " +
@@ -45,8 +41,6 @@ public class Scheduler_Database extends SQLiteOpenHelper {
                 ");"
         );
     }
-
-    @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         _context.deleteDatabase(DATABASE_NAME);
         createDatabase(sqLiteDatabase);
