@@ -24,6 +24,11 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="ExampleCaption" />
+    <EditText
+        android:id="@+id/ImportanceLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text = "Level"/>
     <TextView
         android:id="@+id/AddDate_ET"
         android:enabled="true"
@@ -35,5 +40,10 @@
         android:enabled="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Example Time"/>
+        android:text="Example Time"/>x
+    <Button
+        android:id="@+id/pushschedule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="push"/>
 </LinearLayout>

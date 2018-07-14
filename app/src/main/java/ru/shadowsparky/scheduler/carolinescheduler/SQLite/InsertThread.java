@@ -12,10 +12,11 @@ public class InsertThread extends AsyncTask<String, Void, Long> {
     ContentValues values;
     ICallbacks.ILoadCallback callback;
 
-    public InsertThread(SQLiteDatabase db, String tableName, ContentValues values) {
-        this.db = db;
+    public InsertThread(Scheduler_Database db, String tableName, ContentValues values, ICallbacks.ILoadCallback callback) {
+        this.db = db.getWritableDatabase();
         this.TableName = tableName;
         this.values = values;
+        this.callback = callback;
     }
     protected void onPreExecute() {
         callback.setLoading(true);
