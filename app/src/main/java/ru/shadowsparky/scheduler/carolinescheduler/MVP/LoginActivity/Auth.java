@@ -14,12 +14,14 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ru.shadowsparky.scheduler.carolinescheduler.Dialogs.LoadingDialog;
 import ru.shadowsparky.scheduler.carolinescheduler.MVP.MainActivity.MainActivity;
 import ru.shadowsparky.scheduler.carolinescheduler.R;
 
 public class Auth extends AppCompatActivity implements ILoginContracts.ContractView_Auth {
     public static final String ACCOUNT_DATA = "ACCOUNT_DATA";
     public static final int FIRST_AUTH = 0;
+    LoadingDialog dialog;
 
     @BindView(R.id.authLoading)
     ProgressBar pb;
@@ -34,6 +36,7 @@ public class Auth extends AppCompatActivity implements ILoginContracts.ContractV
             setTheme(R.style.AppThemeWithStatusBarColor);
             setContentView(R.layout.activity_auth);
             ButterKnife.bind(this);
+            dialog = new LoadingDialog(this);
         }
     }
 

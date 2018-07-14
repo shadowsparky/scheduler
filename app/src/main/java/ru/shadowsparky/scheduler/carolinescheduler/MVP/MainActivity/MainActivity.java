@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity implements IMainContracts.Ma
     ListView _list;
     @BindView(R.id.EmptyList)
     TextView _empty;
-    private ArrayList<Schedule_Element> elements;
 
     public Context getContext() {
         return getApplicationContext();
@@ -47,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements IMainContracts.Ma
     * PLEASE
     * PLEASE
     * PLEASE */
+    private ArrayList<Schedule_Element> elements;
+
     private void checkAdapter(){
         elements = new ArrayList<>();
         for (int i = 0; i < 5; i++){
@@ -58,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements IMainContracts.Ma
         }
         setAdapter(elements);
     }
+    /*------------------------------------------*/
+
     public void setToolbar() {
         setSupportActionBar(_toolbar);
     }

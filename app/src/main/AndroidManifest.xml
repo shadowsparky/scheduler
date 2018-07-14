@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".MVP.MainActivity.MainActivity" />
         <activity android:name=".MVP.AddScheduleActivity.AddScheduleView" />
-        <activity android:name=".MVP.ShowScheduleActivity.ShowScheduleView"></activity>
+        <activity android:name=".MVP.ShowScheduleActivity.ShowScheduleView" />
+        <activity android:name=".Dialogs.ShowTimeDialog"></activity>
     </application>
 
 </manifest>
