@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.View;
 
 import ru.shadowsparky.scheduler.carolinescheduler.Interfaces.ICallbacks;
-import ru.shadowsparky.scheduler.carolinescheduler.SQLite.Scheduler_Database;
+import ru.shadowsparky.scheduler.carolinescheduler.SQLite.Tables.SchedulesTable;
 
 public interface IAddSheduleContracts {
     interface IContractSheduleView{
@@ -24,6 +24,6 @@ public interface IAddSheduleContracts {
         void addSchedule();
     }
     interface IContractSheduleModel{
-        void addScheduleLogic(String[]data, Scheduler_Database db, ICallbacks.ILoadCallback callback);
+        void addScheduleLogic(SchedulesTable data, ICallbacks.ILoadCallback callback);
     }
 }

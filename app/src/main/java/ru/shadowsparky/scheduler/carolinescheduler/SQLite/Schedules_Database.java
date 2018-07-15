@@ -8,5 +8,5 @@ import ru.shadowsparky.scheduler.carolinescheduler.SQLite.Tables.SchedulesTable;
 
 @Database(entities = {SchedulesTable.class}, version = 1)
 public abstract class Schedules_Database extends RoomDatabase {
-    public abstract ScheduleDao _schedule_dao();
+    public abstract ScheduleDao schedule_dao();
 }

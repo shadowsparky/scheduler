@@ -53,19 +53,15 @@ public class AddScheduleView extends AppCompatActivity implements IAddSheduleCon
         ShowDateDialog dialog = new ShowDateDialog(this, callback);
         dialog.show();
     }
-
     public void enableLoading() {
         dialog.show();
     }
     public void disableLoading() {
         dialog.dismiss();
     }
-
-    @Override
     public Context getContext() {
         return this;
     }
-
     @OnClick(R.id.AddTime_ET)
     public void selectTime(){
         ICallbacks.IDialogCallback callback = (result)->{
