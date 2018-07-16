@@ -14,7 +14,7 @@ public class AddSchedulePresenter implements IAddSheduleContracts.IContractShedu
     public void addSchedule() {
         // TODO: add inputed values checker
         ICallbacks.ILoadCallback callback = (result) -> {
-            if (result){
+            if (!result){
                 view.disableLoading();
             } else {
                 view.enableLoading();

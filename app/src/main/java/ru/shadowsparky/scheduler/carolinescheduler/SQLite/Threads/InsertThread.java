@@ -1,6 +1,7 @@
 package ru.shadowsparky.scheduler.carolinescheduler.SQLite.Threads;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.provider.ContactsContract;
@@ -15,8 +16,8 @@ public class InsertThread extends AsyncTask<SchedulesTable, Void, Void> {
     Schedules_Database db;
     ScheduleDao query;
 
-    public InsertThread(ICallbacks.ILoadCallback callback) {
-        db = DatabaseConfig.getInstance().getDb();
+    public InsertThread(ICallbacks.ILoadCallback callback, Context context) {
+        db = DatabaseConfig.getDb(context);
         query = db.schedule_dao();
         this.callback = callback;
     }
@@ -24,7 +25,7 @@ public class InsertThread extends AsyncTask<SchedulesTable, Void, Void> {
         callback.setLoading(true);
     }
     protected void onPostExecute(Void result) {
-        callback.setLoading(false);
+        callback.setLoading(false2);
     }
     protected Void doInBackground(SchedulesTable... data) {
         query.insert(data[0]);

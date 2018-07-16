@@ -41,7 +41,7 @@ public class AddScheduleView extends AppCompatActivity implements IAddSheduleCon
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_schedule);
-        presenter = new AddSchedulePresenter(this, new AddScheduleModel());
+        presenter = new AddSchedulePresenter(this, new AddScheduleModel(this));
         dialog = new LoadingDialog(this);
         ButterKnife.bind(this);
     }
@@ -57,7 +57,7 @@ public class AddScheduleView extends AppCompatActivity implements IAddSheduleCon
         dialog.show();
     }
     public void disableLoading() {
-        dialog.dismiss();
+        dialog.hide();
     }
     public Context getContext() {
         return this;

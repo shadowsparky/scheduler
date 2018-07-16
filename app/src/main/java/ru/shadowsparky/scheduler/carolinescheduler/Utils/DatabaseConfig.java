@@ -2,23 +2,23 @@ package ru.shadowsparky.scheduler.carolinescheduler.Utils;
 
 import android.app.Application;
 import android.arch.persistence.room.Room;
+import android.content.Context;
 
 import ru.shadowsparky.scheduler.carolinescheduler.SQLite.Schedules_Database;
 
+import static java.security.AccessController.getContext;
+
 public class DatabaseConfig extends Application {
-    public static DatabaseConfig Instance;
-    public static Schedules_Database db;
+    public static Schedules_Database Instance;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        Instance = this;
-        db = Room.databaseBuilder(this, Schedules_Database.class, "db").build();
     }
-    public static DatabaseConfig getInstance(){
+
+    public static Schedules_Database getDb(Context context){
+        if (Instance == null)
+            Instance = Room.databaseBuilder(context.getApplicationContext(), Schedules_Database.class, "db").build();
         return Instance;
-    }
-    public static Schedules_Database getDb(){
-        return db;
     }
 }
