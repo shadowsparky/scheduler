@@ -25,7 +25,7 @@ public class InsertThread extends AsyncTask<SchedulesTable, Void, Void> {
         callback.setLoading(true);
     }
     protected void onPostExecute(Void result) {
-        callback.setLoading(false2);
+        callback.setLoading(false);
     }
     protected Void doInBackground(SchedulesTable... data) {
         query.insert(data[0]);

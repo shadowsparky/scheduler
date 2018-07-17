@@ -13,13 +13,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import ru.shadowsparky.scheduler.carolinescheduler.R;
+import ru.shadowsparky.scheduler.carolinescheduler.SQLite.Tables.SchedulesTable;
 import ru.shadowsparky.scheduler.carolinescheduler.Utils.Schedule_Element;
 
 public class MainListAdapter extends BaseAdapter {
     private Context mContext;
-    private ArrayList<Schedule_Element> elements;
+    private ArrayList<SchedulesTable> elements;
 
-    public MainListAdapter(Context mContext, ArrayList<Schedule_Element> elements) {
+    public MainListAdapter(Context mContext, ArrayList<SchedulesTable> elements) {
         this.mContext = mContext;
         this.elements = elements;
     }
@@ -45,7 +46,7 @@ public class MainListAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = inflater.inflate(R.layout.single_item, parent, false);
         TextView _textView = row.findViewById(R.id.text);
-        _textView.setText(elements.get(position).getSchedule_Header());
+        _textView.setText(elements.get(position).getName());
         ImageView _imageView = row.findViewById(R.id.image);
         _imageView.setImageResource(android.R.color.background_dark);
         return row;

@@ -1,49 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MVP.AddScheduleActivity.AddScheduleView">
-    <include layout="@layout/toolbarious"
-        android:layout_height="60dp"
-        android:layout_width="match_parent"></include>
+    android:background="@android:color/background_light"
+    android:fitsSystemWindows="true"
+    >
 
-    <EditText
-        android:id="@+id/AddHeaderName_ET"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="ExampleHeader" />
-    <EditText
-        android:id="@+id/AddCaptionName_ET"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="ExampleCaption" />
-    <EditText
-        android:id="@+id/ImportanceLevel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text = "Level"/>
-    <TextView
-        android:id="@+id/AddDate_ET"
-        android:enabled="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Example Date"/>
-    <TextView
-        android:id="@+id/AddTime_ET"
-        android:enabled="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Example Time"/>x
-    <Button
-        android:id="@+id/pushschedule"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="push"/>
-</LinearLayout>
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/main.appbar"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true"
+        >
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/main.collapsing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/colorPrimary"
+            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleMarginEnd="64dp"
+            >
+
+            <ImageView
+                android:id="@+id/main.backdrop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:fitsSystemWindows="true"
+                android:src="@drawable/ic_launcher_round"
+                app:layout_collapseMode="parallax"
+                />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/main.toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"/>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
+
+        <EditText
+            android:id="@+id/addEditText"
+            android:layout_margin="36dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </EditText>
+        <Button
+            android:id="@+id/pushScheduler"
+            android:layout_margin="36dp"
+            style="@android:style/Widget.Material.Button.Colored"
+            android:layout_height="wrap_content"
+            android:text="@string/Choose"
+            android:layout_width="match_parent"></Button>
+    </android.support.v4.widget.NestedScrollView>
+
+
+</android.support.design.widget.CoordinatorLayout>
+
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical"-->
+    <!--tools:context=".MVP.AddScheduleActivity.AddScheduleView">-->
+    <!--<include layout="@layout/toolbarious"-->
+        <!--android:layout_height="60dp"-->
+        <!--android:layout_width="match_parent"></include>-->
+
+    <!--<EditText-->
+        <!--android:id="@+id/AddHeaderName_ET"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:ems="10"-->
+        <!--android:inputType="textPersonName"-->
+        <!--android:text="ExampleHeader" />-->
+    <!--<EditText-->
+        <!--android:id="@+id/AddCaptionName_ET"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:ems="10"-->
+        <!--android:inputType="textPersonName"-->
+        <!--android:text="ExampleCaption" />-->
+    <!--<EditText-->
+        <!--android:id="@+id/ImportanceLevel"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text = "Level"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/AddDate_ET"-->
+        <!--android:enabled="true"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Example Date"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/AddTime_ET"-->
+        <!--android:enabled="true"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Example Time"/>x-->
+    <!--<Button-->
+        <!--android:id="@+id/pushschedule"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="push"/>-->
+<!--</LinearLayout>-->
