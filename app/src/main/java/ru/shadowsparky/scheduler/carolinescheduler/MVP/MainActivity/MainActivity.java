@@ -5,19 +5,23 @@ import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.AdapterView;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
 import ru.shadowsparky.scheduler.carolinescheduler.Adapters.MainListAdapter;
+import ru.shadowsparky.scheduler.carolinescheduler.Adapters.MainRVAdapter;
 import ru.shadowsparky.scheduler.carolinescheduler.MVP.AddScheduleActivity.AddScheduleView;
 import ru.shadowsparky.scheduler.carolinescheduler.MVP.ShowScheduleActivity.ShowScheduleView;
 import ru.shadowsparky.scheduler.carolinescheduler.R;
@@ -28,8 +32,8 @@ public class MainActivity extends AppCompatActivity implements IMainContracts.Ma
 
     @BindView(R.id.toolbar)
     Toolbar _toolbar;
-    @BindView(R.id.MainList)
-    ListView _list;
+    @BindView(R.id.RV_List)
+    RecyclerView _list;
     @BindView(R.id.EmptyList)
     TextView _empty;
     @BindView(R.id.swiperefresh)
@@ -67,25 +71,22 @@ public class MainActivity extends AppCompatActivity implements IMainContracts.Ma
     public void disableRefreshing() {
         _refreshList.setRefreshing(false);
     }
-    public void setAdapter(ArrayList<SchedulesTable> elements) {
-        MainListAdapter adapter = new MainListAdapter(this, elements);
+    public void setAdapter(List<SchedulesTable> elements) {
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        _list.setLayoutManager(llm);
+        _list.setHasFixedSize(false);
+        MainRVAdapter adapter = new MainRVAdapter(elements, getContext());
         _list.setAdapter(adapter);
     }
     public void openActivity(Intent intent) {
         startActivity(intent);
     }
 
-    @OnItemClick(R.id.MainList)
-    public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-        _presenter.showViewScheduleActivity(position);
-    }
     @OnClick(R.id.fab)
     public void FloatActionBarClicked(View view){
         _presenter.showAddScheduleActivity();
     }
     public void onRefresh() {
-        Runnable run = ()->
-            _presenter.getDataToList();
-        new Thread(run).start();
+        _presenter.getDataToList();
     }
 }

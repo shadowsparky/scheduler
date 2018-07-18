@@ -19,7 +19,7 @@ public interface IMainContracts {
         void enableRefreshing();
         void disableRefreshing();
         Context getContext();
-        void setAdapter(ArrayList<SchedulesTable> elements);
+        void setAdapter(List<SchedulesTable> elements);
         void openActivity(Intent intent);
     }
     interface MainPresenterContract{

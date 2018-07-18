@@ -3,6 +3,7 @@ package ru.shadowsparky.scheduler.carolinescheduler.MVP.MainActivity;
 import android.content.Intent;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ru.shadowsparky.scheduler.carolinescheduler.Interfaces.ICallbacks;
 import ru.shadowsparky.scheduler.carolinescheduler.MVP.AddScheduleActivity.AddScheduleView;
@@ -13,7 +14,7 @@ import ru.shadowsparky.scheduler.carolinescheduler.SQLite.Tables.SchedulesTable;
 public class MainPresenter implements IMainContracts.MainPresenterContract {
     IMainContracts.MainViewContract view;
     IMainContracts.MainModelContract _model;
-    ArrayList<SchedulesTable> elements;
+    List<SchedulesTable> elements;
 
     public MainPresenter(IMainContracts.MainViewContract view, IMainContracts.MainModelContract model) {
         this.view = view;
@@ -27,7 +28,7 @@ public class MainPresenter implements IMainContracts.MainPresenterContract {
             else
                 view.disableRefreshing();
         };
-        elements = (ArrayList<SchedulesTable>) _model.getElements(callback, view.getContext());
+        elements = _model.getElements(callback, view.getContext());
         if (elements != null)
             view.setAdapter(elements);
     }
