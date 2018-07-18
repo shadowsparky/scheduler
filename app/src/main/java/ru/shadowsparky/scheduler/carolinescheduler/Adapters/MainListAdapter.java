@@ -46,7 +46,7 @@ public class MainListAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View row = inflater.inflate(R.layout.single_item, parent, false);
         TextView _textView = row.findViewById(R.id.text);
-        _textView.setText(elements.get(position).getName());
+        _textView.setText(elements.get(position).getCaption());
         ImageView _imageView = row.findViewById(R.id.image);
         _imageView.setImageResource(android.R.color.background_dark);
         return row;

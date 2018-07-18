@@ -22,7 +22,6 @@ public class AddSchedulePresenter implements IAddSheduleContracts.IContractShedu
         };
         SchedulesTable data = new SchedulesTable();
         data.setCaption(view.getCaption());
-        data.setName(view.getHeader());
         data.setImportance_Level(view.getLevel());
         data.setDate(view.getDate());
         data.setTime(view.getTime());

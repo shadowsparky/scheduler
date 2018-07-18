@@ -7,7 +7,7 @@ import android.arch.persistence.room.PrimaryKey;
 public class SchedulesTable {
     @PrimaryKey(autoGenerate = true)
     private int Schedule_ID;
-    private String Name;
+//    private String Name;
     private String Caption;
     private String Importance_Level;
     private String Date;
@@ -19,12 +19,12 @@ public class SchedulesTable {
     public void setSchedule_ID(int schedule_ID) {
         Schedule_ID = schedule_ID;
     }
-    public String getName() {
-        return Name;
-    }
-    public void setName(String name) {
-        Name = name;
-    }
+//    public String getName() {
+//        return Name;
+//    }
+//    public void setName(String name) {
+//        Name = name;
+//    }
     public String getCaption() {
         return Caption;
     }

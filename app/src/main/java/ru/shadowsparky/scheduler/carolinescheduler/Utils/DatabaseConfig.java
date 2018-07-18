@@ -18,7 +18,7 @@ public class DatabaseConfig extends Application {
 
     public static Schedules_Database getDb(Context context){
         if (Instance == null)
-            Instance = Room.databaseBuilder(context.getApplicationContext(), Schedules_Database.class, "db").build();
+            Instance = Room.databaseBuilder(context.getApplicationContext(), Schedules_Database.class, "db").fallbackToDestructiveMigration().build();
         return Instance;
     }
 }

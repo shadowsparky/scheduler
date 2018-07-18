@@ -8,17 +8,18 @@ import ru.shadowsparky.scheduler.carolinescheduler.SQLite.Tables.SchedulesTable;
 
 public interface IAddSheduleContracts {
     interface IContractSheduleView{
-        String getHeader();
         String getCaption();
         String getDate();
         String getTime();
         String getLevel();
-        void pushShedule(View view);
-        void selectTime();
-        void selectDate();
         void enableLoading();
         void disableLoading();
         Context getContext();
+        void initToolbar();
+        void showChooseTimeDialog();
+        void showChooseDateDialog();
+        void showChooseLevelDialog();
+        void scheduleAddClick();
     }
     interface IContractShedulePresenter {
         void addSchedule();
