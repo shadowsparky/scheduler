@@ -2,6 +2,7 @@ package ru.shadowsparky.scheduler.carolinescheduler.MVP.MainActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -23,12 +24,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemClick;
+import io.reactivex.subjects.PublishSubject;
+import io.reactivex.subjects.ReplaySubject;
 import ru.shadowsparky.scheduler.carolinescheduler.Adapters.MainListAdapter;
 import ru.shadowsparky.scheduler.carolinescheduler.Adapters.MainRVAdapter;
 import ru.shadowsparky.scheduler.carolinescheduler.MVP.AddScheduleActivity.AddScheduleView;
 import ru.shadowsparky.scheduler.carolinescheduler.MVP.ShowScheduleActivity.ShowScheduleView;
 import ru.shadowsparky.scheduler.carolinescheduler.R;
 import ru.shadowsparky.scheduler.carolinescheduler.SQLite.Tables.SchedulesTable;
+import ru.shadowsparky.scheduler.carolinescheduler.Utils.DatabaseConfig;
 import ru.shadowsparky.scheduler.carolinescheduler.Utils.Schedule_Element;
 
 public class MainActivity extends AppCompatActivity implements IMainContracts.MainViewContract, SwipeRefreshLayout.OnRefreshListener {
@@ -56,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements IMainContracts.Ma
         _presenter = new MainPresenter(this, new MainModel());
         onRefresh();
         _presenter.initSwipe(_list);
+        test();
     }
     @Override public void setToolbar() {
         setSupportActionBar(_toolbar);
@@ -74,11 +79,19 @@ public class MainActivity extends AppCompatActivity implements IMainContracts.Ma
     @Override public void disableRefreshing() {
         _refreshList.setRefreshing(false);
     }
+    private PublishSubject<SchedulesTable> _subject = PublishSubject.create();
+    private void test(){
+        DatabaseConfig.LOG("SUBSCRIBE INITIALIZE");
+        _subject = PublishSubject.create();
+        _subject.subscribe(view-> {_presenter.showViewScheduleActivity(view.getSchedule_ID());
+            DatabaseConfig.LOG("Activity open");});
+    }
+
     @Override public void setAdapter(List<SchedulesTable> elements) {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         _list.setLayoutManager(llm);
         _list.setHasFixedSize(false);
-        MainRVAdapter adapter = new MainRVAdapter(elements, getContext());
+        MainRVAdapter adapter = new MainRVAdapter(elements, getContext(), _subject);
         elements = adapter.getData();
         _list.setAdapter(adapter);
     }

@@ -1,5 +1,7 @@
 package ru.shadowsparky.scheduler.carolinescheduler.Adapters;
 import android.content.Context;
+import android.content.Intent;
+import android.service.autofill.SaveCallback;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.SwipeDismissBehavior;
@@ -16,15 +18,27 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Observable;
+
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.subjects.PublishSubject;
+import io.reactivex.subjects.ReplaySubject;
+import io.reactivex.subjects.Subject;
+import ru.shadowsparky.scheduler.carolinescheduler.MVP.MainActivity.IMainContracts;
+import ru.shadowsparky.scheduler.carolinescheduler.MVP.ShowScheduleActivity.ShowScheduleView;
 import ru.shadowsparky.scheduler.carolinescheduler.R;
 import ru.shadowsparky.scheduler.carolinescheduler.SQLite.DAO.ScheduleDao;
 import ru.shadowsparky.scheduler.carolinescheduler.SQLite.Tables.SchedulesTable;
+import ru.shadowsparky.scheduler.carolinescheduler.Utils.DatabaseConfig;
 
 public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.SchedulesViewHolder>{
-
     public static class SchedulesViewHolder extends RecyclerView.ViewHolder{
         LinearLayout _section;
         ImageView _image;
@@ -52,10 +66,11 @@ public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.SchedulesV
     }
 
     private Context _context;
-    public MainRVAdapter(List<SchedulesTable> data, Context _context) {
+    private PublishSubject<SchedulesTable> _subject;
+    public MainRVAdapter(List<SchedulesTable> data, Context _context, PublishSubject<SchedulesTable> _subject) {
         this.data = data;
         this._context = _context;
-        Collections.sort(this.data, Comparator.comparing(SchedulesTable::getImportance_Level));
+        this._subject = _subject;
     }
 
     @Override
@@ -80,11 +95,12 @@ public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.SchedulesV
         schedulesViewHolder._content.setText(data.get(i).getCaption());
         schedulesViewHolder._datetime.setText(data.get(i).getDate() + ", " + data.get(i).getTime());
         setAnimation(schedulesViewHolder.itemView, i);
+        DatabaseConfig.LOG(data.get(i).getCaption() + " subscribed");
         schedulesViewHolder._card.setOnClickListener(view->{
-            Toast.makeText(_context, data.get(i).getCaption() + " clicked", Toast.LENGTH_SHORT).show();});
-
+            _subject.onNext(data.get(i));
+            DatabaseConfig.LOG("Item clicked");
+        });
     }
-
     @Override
     public int getItemCount() {
         return data.size();
