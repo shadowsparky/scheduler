@@ -2,16 +2,19 @@ package ru.shadowsparky.scheduler.carolinescheduler.MVP.MainActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,10 +43,10 @@ public class MainActivity extends AppCompatActivity implements IMainContracts.Ma
     SwipeRefreshLayout _refreshList;
     private IMainContracts.MainPresenterContract _presenter;
 
-    public Context getContext() {
+    @Override public Context getContext() {
         return getApplicationContext();
     }
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme_toolbar);
         setContentView(R.layout.activity_main);
@@ -52,41 +55,45 @@ public class MainActivity extends AppCompatActivity implements IMainContracts.Ma
         _refreshList.setOnRefreshListener(this);
         _presenter = new MainPresenter(this, new MainModel());
         onRefresh();
+        _presenter.initSwipe(_list);
     }
-
-    public void setToolbar() {
+    @Override public void setToolbar() {
         setSupportActionBar(_toolbar);
     }
-    public void ShowList() {
+    @Override public void ShowList() {
         _list.setVisibility(View.VISIBLE);
         _empty.setVisibility(View.INVISIBLE);
     }
-    public void HideList() {
+    @Override public void HideList() {
         _list.setVisibility(View.INVISIBLE);
         _empty.setVisibility(View.VISIBLE);
     }
-    public void enableRefreshing() {
+    @Override public void enableRefreshing() {
         _refreshList.setRefreshing(true);
     }
-    public void disableRefreshing() {
+    @Override public void disableRefreshing() {
         _refreshList.setRefreshing(false);
     }
-    public void setAdapter(List<SchedulesTable> elements) {
+    @Override public void setAdapter(List<SchedulesTable> elements) {
         LinearLayoutManager llm = new LinearLayoutManager(this);
         _list.setLayoutManager(llm);
         _list.setHasFixedSize(false);
         MainRVAdapter adapter = new MainRVAdapter(elements, getContext());
+        elements = adapter.getData();
         _list.setAdapter(adapter);
     }
-    public void openActivity(Intent intent) {
+    @Override public void openActivity(Intent intent) {
         startActivity(intent);
     }
-
     @OnClick(R.id.fab)
-    public void FloatActionBarClicked(View view){
+    @Override public void FloatActionBarClicked(View view){
         _presenter.showAddScheduleActivity();
     }
-    public void onRefresh() {
+    @Override protected void onPostResume() {
+        super.onPostResume();
+        onRefresh();
+    }
+    @Override public void onRefresh() {
         _presenter.getDataToList();
     }
 }

@@ -30,21 +30,6 @@ import ru.shadowsparky.scheduler.carolinescheduler.Interfaces.ICallbacks;
 import ru.shadowsparky.scheduler.carolinescheduler.R;
 
 public class AddScheduleView extends AppCompatActivity implements IAddSheduleContracts.IContractSheduleView {
-//    @BindView(R.id.AddHeaderName_ET)
-//    EditText _header;
-//
-//    @BindView(R.id.AddCaptionName_ET)
-//    EditText _caption;
-//
-//    @BindView(R.id.ImportanceLevel)
-//    EditText _level;
-//
-//    @BindView(R.id.AddDate_ET)
-//    TextView date;
-//
-//    @BindView(R.id.AddTime_ET)
-//    TextView time;
-
     private LoadingDialog dialog;
     private IAddSheduleContracts.IContractShedulePresenter presenter;
 
@@ -105,6 +90,7 @@ public class AddScheduleView extends AppCompatActivity implements IAddSheduleCon
     @OnClick(R.id.addScheduleButton)
     @Override public void scheduleAddClick() {
         presenter.addSchedule();
+        finish();
     }
     @Override public String getCaption() {
         return caption.getText().toString();
