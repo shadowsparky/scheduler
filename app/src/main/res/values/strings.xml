@@ -10,6 +10,11 @@
     <string name="AuthChecker">Пожалуйста, подождите...</string>
     <string name="Choose">Выбрать</string>
     <string name="ChooseDate">Выберите дату</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ChooseImportanceLevel">Выберите уровень важности</string>
+    <string name="ChooseTime">Выберите время</string>
+    <string name="InputCaption">Введите содержание напоминания</string>
+    <string name="AddSchedule">Добавление напоминаний</string>
+    <string name="ShowSchedules">Напоминания</string>
+    <string name="Date">Дата</string>
+    <string name="Time">Время</string>
 </resources>

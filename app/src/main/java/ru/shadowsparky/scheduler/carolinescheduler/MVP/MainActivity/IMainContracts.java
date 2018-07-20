@@ -28,6 +28,7 @@ public interface IMainContracts {
         void openActivity(Intent intent);
         void onRefresh();
         void FloatActionBarClicked(View view);
+        void subjectInit();
 
     }
     interface MainPresenterContract{

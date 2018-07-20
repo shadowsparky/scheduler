@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements IMainContracts.Ma
     @BindView(R.id.swiperefresh)
     SwipeRefreshLayout _refreshList;
     private IMainContracts.MainPresenterContract _presenter;
-
+    private PublishSubject<SchedulesTable> _subject = PublishSubject.create();
     @Override public Context getContext() {
         return getApplicationContext();
     }
@@ -54,13 +54,14 @@ public class MainActivity extends AppCompatActivity implements IMainContracts.Ma
         super.onCreate(savedInstanceState);
         setTheme(R.style.AppTheme_toolbar);
         setContentView(R.layout.activity_main);
+        setTitle(getResources().getString(R.string.ShowSchedules));
         ButterKnife.bind(this);
         setToolbar();
         _refreshList.setOnRefreshListener(this);
         _presenter = new MainPresenter(this, new MainModel());
         onRefresh();
         _presenter.initSwipe(_list);
-        test();
+        subjectInit();
     }
     @Override public void setToolbar() {
         setSupportActionBar(_toolbar);
@@ -79,8 +80,7 @@ public class MainActivity extends AppCompatActivity implements IMainContracts.Ma
     @Override public void disableRefreshing() {
         _refreshList.setRefreshing(false);
     }
-    private PublishSubject<SchedulesTable> _subject = PublishSubject.create();
-    private void test(){
+    @Override public void subjectInit(){
         DatabaseConfig.LOG("SUBSCRIBE INITIALIZE");
         _subject = PublishSubject.create();
         _subject.subscribe(view-> {_presenter.showViewScheduleActivity(view.getSchedule_ID());

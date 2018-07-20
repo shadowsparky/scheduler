@@ -3,11 +3,11 @@ package ru.shadowsparky.scheduler.carolinescheduler.MVP.AddScheduleActivity;
 import ru.shadowsparky.scheduler.carolinescheduler.Interfaces.ICallbacks;
 import ru.shadowsparky.scheduler.carolinescheduler.SQLite.Tables.SchedulesTable;
 
-public class AddSchedulePresenter implements IAddSheduleContracts.IContractShedulePresenter {
-    private IAddSheduleContracts.IContractSheduleView view;
-    private IAddSheduleContracts.IContractSheduleModel model;
+public class AddSchedulePresenter implements IAddScheduleContracts.IContractShedulePresenter {
+    private IAddScheduleContracts.IContractSheduleView view;
+    private IAddScheduleContracts.IContractSheduleModel model;
 
-    public AddSchedulePresenter(IAddSheduleContracts.IContractSheduleView view, IAddSheduleContracts.IContractSheduleModel model) {
+    public AddSchedulePresenter(IAddScheduleContracts.IContractSheduleView view, IAddScheduleContracts.IContractSheduleModel model) {
         this.view = view;
         this.model = model;
     }
@@ -22,9 +22,9 @@ public class AddSchedulePresenter implements IAddSheduleContracts.IContractShedu
         };
         SchedulesTable data = new SchedulesTable();
         data.setCaption(view.getCaption());
-        data.setImportance_Level(view.getLevel());
-        data.setDate(view.getDate());
-        data.setTime(view.getTime());
+        data.setImportance_Level(view.get_fragment().getLevel().getText().toString());
+        data.setDate(view.get_fragment().getDate().getText().toString());
+        data.setTime(view.get_fragment().getTime().getText().toString());
         data.setEmail("foo@bar.com");
         model.addScheduleLogic(data, callback);
     }

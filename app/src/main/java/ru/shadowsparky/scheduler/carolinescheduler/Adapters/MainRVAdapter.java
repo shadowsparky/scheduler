@@ -58,13 +58,10 @@ public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.SchedulesV
             _rv = itemView.findViewById(R.id.RV_List);
         }
     }
-
     private List<SchedulesTable> data;
-
     public List<SchedulesTable> getData() {
         return data;
     }
-
     private Context _context;
     private PublishSubject<SchedulesTable> _subject;
     public MainRVAdapter(List<SchedulesTable> data, Context _context, PublishSubject<SchedulesTable> _subject) {
@@ -73,19 +70,15 @@ public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.SchedulesV
         this._subject = _subject;
     }
 
-    @Override
-    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+    @Override public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
     }
-    @Override
-    public SchedulesViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    @Override public SchedulesViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.rv_item, viewGroup, false);
         SchedulesViewHolder svh = new SchedulesViewHolder(v);
         return svh;
     }
-
-    @Override
-    public void onBindViewHolder(@NonNull SchedulesViewHolder schedulesViewHolder, int i) {
+    @Override public void onBindViewHolder(@NonNull SchedulesViewHolder schedulesViewHolder, int i) {
         if ((i==0) || (!data.get(i).getImportance_Level().equals(data.get(i-1).getImportance_Level()))){
             schedulesViewHolder._section.setVisibility(View.VISIBLE);
             schedulesViewHolder._importanceLevel.setText(data.get(i).getImportance_Level());
@@ -101,8 +94,7 @@ public class MainRVAdapter extends RecyclerView.Adapter<MainRVAdapter.SchedulesV
             DatabaseConfig.LOG("Item clicked");
         });
     }
-    @Override
-    public int getItemCount() {
+    @Override public int getItemCount() {
         return data.size();
     }
     private int lastPosition = -1;
