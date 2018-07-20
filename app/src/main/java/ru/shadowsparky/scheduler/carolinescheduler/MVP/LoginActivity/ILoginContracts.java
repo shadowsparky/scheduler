@@ -12,6 +12,7 @@ public interface ILoginContracts {
         void onAuthButtonClick();
         void onRegButtonClick();
         void goMainActivity();
+        @Deprecated
         boolean getCheckboxStatus();
         String[] getAccountData();
         SharedPreferences getSharedPref();

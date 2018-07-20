@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -33,7 +34,14 @@ public class ShowScheduleView extends AppCompatActivity implements IShowSchedule
     @BindView(R.id.showScheduleInputCaption)
     EditText caption;
     private LoadingDialog dialog;
+    IShowScheduleContract.ShowSchedulePresenterContract _presenter;
 
+    public SchedulesTable getElement() {
+        return element;
+    }
+    public EditText getCaption() {
+        return caption;
+    }
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_schedule);
@@ -41,6 +49,7 @@ public class ShowScheduleView extends AppCompatActivity implements IShowSchedule
         ButterKnife.bind(this);
         initFragment();
         initToolbar();
+        _presenter = new ShowSchedulePresenter(this, new ShowScheduleModel());
     }
     @Override public void initFragment(){
         DatabaseConfig.LOG("FRAGMENT BEFORE INITIALIZE");
@@ -108,7 +117,8 @@ public class ShowScheduleView extends AppCompatActivity implements IShowSchedule
 
     @Override
     public void updateDataRequest() {
-        Toast.makeText(this, "call to update", Toast.LENGTH_SHORT).show();
+        _presenter.updateData();
+        finish();
     }
 
     @Override public AddScheduleBrainFragment get_fragment() {

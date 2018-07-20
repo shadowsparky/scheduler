@@ -2,6 +2,7 @@ package ru.shadowsparky.scheduler.carolinescheduler.MVP.LoginActivity;
 
 import ru.shadowsparky.scheduler.carolinescheduler.Exceptions.AuthDataNotFoundException;
 import ru.shadowsparky.scheduler.carolinescheduler.Interfaces.ICallbacks;
+import ru.shadowsparky.scheduler.carolinescheduler.Utils.DatabaseConfig;
 
 import static ru.shadowsparky.scheduler.carolinescheduler.MVP.LoginActivity.SchedulerModel.AUTH_DATA_SIZE;
 import static ru.shadowsparky.scheduler.carolinescheduler.MVP.LoginActivity.SchedulerModel.LOGIN_INDEX;
