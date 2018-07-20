@@ -1,9 +1,8 @@
 package ru.shadowsparky.scheduler.carolinescheduler.MVP.AddScheduleActivity;
 
 import android.content.Context;
-import android.view.View;
-import android.widget.Button;
 
+import ru.shadowsparky.scheduler.carolinescheduler.Fragments.AddScheduleBrainFragment;
 import ru.shadowsparky.scheduler.carolinescheduler.Interfaces.ICallbacks;
 import ru.shadowsparky.scheduler.carolinescheduler.SQLite.Tables.SchedulesTable;
 

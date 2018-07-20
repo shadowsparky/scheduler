@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 import ru.shadowsparky.scheduler.carolinescheduler.Dialogs.LoadingDialog;
 import ru.shadowsparky.scheduler.carolinescheduler.Dialogs.ShowDateDialog;
 import ru.shadowsparky.scheduler.carolinescheduler.Dialogs.ShowTimeDialog;
+import ru.shadowsparky.scheduler.carolinescheduler.Fragments.AddScheduleBrainFragment;
 import ru.shadowsparky.scheduler.carolinescheduler.Interfaces.ICallbacks;
 import ru.shadowsparky.scheduler.carolinescheduler.R;
 import ru.shadowsparky.scheduler.carolinescheduler.Utils.DatabaseConfig;

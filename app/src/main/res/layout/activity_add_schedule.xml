@@ -25,7 +25,7 @@
             android:inputType="textMultiLine"
             android:maxLines="7"
             android:textColor="@android:color/white"
-            android:hint="@string/Choose">
+            android:hint="@string/InputCaption">
         </EditText>
     </FrameLayout>
     <FrameLayout
@@ -33,51 +33,3 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"></FrameLayout>
 </LinearLayout>
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:orientation="vertical"-->
-    <!--tools:context=".MVP.AddScheduleActivity.AddScheduleView">-->
-    <!--<include layout="@layout/toolbarious"-->
-        <!--android:layout_height="60dp"-->
-        <!--android:layout_width="match_parent"></include>-->
-
-    <!--<EditText-->
-        <!--android:id="@+id/AddHeaderName_ET"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:ems="10"-->
-        <!--android:inputType="textPersonName"-->
-        <!--android:text="ExampleHeader" />-->
-    <!--<EditText-->
-        <!--android:id="@+id/AddCaptionName_ET"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:ems="10"-->
-        <!--android:inputType="textPersonName"-->
-        <!--android:text="ExampleCaption" />-->
-    <!--<EditText-->
-        <!--android:id="@+id/ImportanceLevel"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text = "Level"/>-->
-    <!--<TextView-->
-        <!--android:id="@+id/AddDate_ET"-->
-        <!--android:enabled="true"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Example Date"/>-->
-    <!--<TextView-->
-        <!--android:id="@+id/AddTime_ET"-->
-        <!--android:enabled="true"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Example Time"/>x-->
-    <!--<Button-->
-        <!--android:id="@+id/pushschedule"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="push"/>-->
-<!--</LinearLayout>-->

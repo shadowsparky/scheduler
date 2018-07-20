@@ -34,7 +34,7 @@ public interface IMainContracts {
     interface MainPresenterContract{
         void getDataToList();
         void showAddScheduleActivity();
-        void showViewScheduleActivity(int Position);
+        void showViewScheduleActivity(SchedulesTable element);
         void initSwipe(RecyclerView _r);
     }
     interface MainModelContract{

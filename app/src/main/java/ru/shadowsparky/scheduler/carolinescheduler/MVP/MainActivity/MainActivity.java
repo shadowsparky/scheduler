@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements IMainContracts.Ma
     @Override public void subjectInit(){
         DatabaseConfig.LOG("SUBSCRIBE INITIALIZE");
         _subject = PublishSubject.create();
-        _subject.subscribe(view-> {_presenter.showViewScheduleActivity(view.getSchedule_ID());
+        _subject.subscribe(view-> {_presenter.showViewScheduleActivity(view);
             DatabaseConfig.LOG("Activity open");});
     }
 

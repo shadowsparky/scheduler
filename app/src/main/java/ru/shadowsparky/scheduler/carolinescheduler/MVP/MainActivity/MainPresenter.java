@@ -1,6 +1,7 @@
 package ru.shadowsparky.scheduler.carolinescheduler.MVP.MainActivity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -9,6 +10,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,9 +73,9 @@ public class MainPresenter implements IMainContracts.MainPresenterContract {
         Intent i = new Intent(view.getContext(), AddScheduleView.class);
         view.openActivity(i);
     }
-    public void showViewScheduleActivity(int position) {
+    public void showViewScheduleActivity(SchedulesTable element) {
         Intent i = new Intent(view.getContext(), ShowScheduleView.class);
-        i.putExtra("ID", position);
+        i.putExtra("Element", element);
         view.openActivity(i);
     }
 }

@@ -3,8 +3,10 @@ package ru.shadowsparky.scheduler.carolinescheduler.SQLite.Tables;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity(tableName = "schedulestable")
-public class SchedulesTable {
+public class SchedulesTable implements Serializable{
     @PrimaryKey(autoGenerate = true)
     private int Schedule_ID;
 //    private String Name;
