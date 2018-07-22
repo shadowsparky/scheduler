@@ -23,6 +23,11 @@
         <activity android:name=".MVP.AddScheduleActivity.AddScheduleView" />
         <activity android:name=".MVP.ShowScheduleActivity.ShowScheduleView" />
         <activity android:name=".Dialogs.ShowTimeDialog"></activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="d9c8d1dd2bd564c90f5db495ae67db2c683ef4f8" />
+        <receiver android:name=".NotificationsBrain.NotificationPublisher" />
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

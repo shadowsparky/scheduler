@@ -14,6 +14,8 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 import ru.shadowsparky.scheduler.carolinescheduler.Dialogs.LoadingDialog;
 import ru.shadowsparky.scheduler.carolinescheduler.MVP.MainActivity.MainActivity;
 import ru.shadowsparky.scheduler.carolinescheduler.R;
@@ -31,6 +33,7 @@ public class Auth extends AppCompatActivity implements ILoginContracts.ContractV
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         _presenter = new SchedulerPresenter(this, new SchedulerModel());
         if (!_presenter.rememberedAuth()) {
             setTheme(R.style.AppThemeWithStatusBarColor);
